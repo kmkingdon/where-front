@@ -1,16 +1,23 @@
-const postURL= "https://convo-pro-server.herokuapp.com/suggestions";
+const postURL= "https://where-server-2.herokuapp.com/add";
 const form= document.querySelector('form');
-const responseShow= document.getElementById('response');
-const textArea= document.querySelector('textarea');
+const responseArea= document.getElementById('response');
+
+
 form.addEventListener('submit', postForm);
 
 function  postForm(event) {
   event.preventDefault();
   const newSubmission = new FormData(event.target);
   const submission= {
-          "question": newSubmission.get("suggestion"),
+          "eventname": newSubmission.get("name"),
+          "location": newSubmission.get("location"),
+          "time": newSubmission.get("time"),
+          "scene": newSubmission.get("scene"),
+          "cost": newSubmission.get("cost"),
+          "price": newSubmission.get("price"),
+          "link": newSubmission.get("link"),
+          "date": newSubmission.get("date"),
         }
-  textArea.value = "";
   sendPost(submission);
 };
 
@@ -28,12 +35,11 @@ function sendPost(submission){
 };
 
 function postResponse(response) {
-  let success= Object.keys(response)[0];
-  let question= Object.values(Object.values(response)[0])[0];
-  let newResponse= document.createTextNode(success +": " + question);
-  responseShow.appendChild(newResponse);
+  let success= response;
+  let newResponse= document.createTextNode(success);
+  responseArea.appendChild(newResponse);
 };
 
 function  removeResponse() {
-  responseShow.innerHTML= "";
+  responseArea.innerHTML= "";
 };
