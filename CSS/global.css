@@ -41,11 +41,15 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 2rem;
+  text-align: center;
+}
+
 a {
   font-family: 'Lato', sans-serif;
 }
-
-
 
 .button {
   background-color: black;
@@ -90,11 +94,28 @@ li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
 }
 
 li a:hover {
   background-color: #555555;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+input, select {
+  width: 70vw;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.form-padding {
+  padding: 1rem;
+}
+
+.form-style-1 {
+    margin:10px auto;
+    max-width: 70vw;
+    padding: 20px 12px 10px 20px;
+    font-size: 30px;
+    font-family: 'Lato', sans-serif;
 }
