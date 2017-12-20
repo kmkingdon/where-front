@@ -1,95 +1,39 @@
-@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
-
-* {
-  box-sizing: border-box;
+.main-page {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body {
-  height: 100vh;
-  width: 100vw;
-  background-color: hsl(0, 0%, 100%);
-  background-image: url("../assets/mobilebackground.png");
-  background-position: bottom;
+.background-image {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url("../assets/background.jpg") center center;
   background-repeat: no-repeat;
-  background-size: cover;
-  display: grid;
-  grid-template-columns: 1rem 32% 32% 32% 1rem;
-  grid-template-rows: 1rem 32% 32% 32% 1rem;
+  opacity: .7;
+  width: auto;
+  height: 100VH;
 }
 
-#logo {
-  grid-column: 2/5;
-  grid-row: 3/4;
-  height: 100%;
-  align-self: center;
-  justify-self: center;
+.padding {
+  padding: 2rem;
 }
 
-#nav {
-  grid-column: 2/5;
-  grid-row: 4/5;
-  align-self: center;
-  justify-self: center;
-  height: 90%;
-  width: 70%;
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#nav a {
-  text-decoration: none;
-  color: hsl(0, 0%, 100%);
-  font-size: 7rem;
+
+h1 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 4rem;
   text-align: center;
-  font-family: 'Cabin Sketch', cursive;
-  text-shadow:
-   -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
-}
-
-#nav ul {
-  width: 100%;
-  height: 100%;
-  background-color: hsl(177,100%,45%);
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
-#nav li {
-  border: solid hsl(0, 0%, 0%) 3px;
-  height: 50%;
-  width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
-header {
-  grid-column: 1/end;
-  grid-row: 1/3;
-  align-self: center;
-  justify-self: center;
-}
-
-
-/*For Desktop*/
-@media only screen and (min-width: 1025px) {
-    body {
-        background-image: url("../assets/desktopbackground.png");
-        background-size: cover;
-    }
-
-    #logo {
-      grid-column: 2/3;
-      grid-row: 2/3;
-    }
-
-    #nav {
-      grid-column: 2/5;
-      grid-row: 3/4;
-      width: 50%;
-    }
 }
