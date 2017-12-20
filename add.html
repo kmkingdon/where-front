@@ -4,19 +4,35 @@
     <meta charset="utf-8">
     <title>Where The Party At?</title>
     <link rel="stylesheet" href="CSS/reset.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-CF64UnUzxV691sOmqagn+TQJmesKn1fgsYmlIPqYB5nm0m32jYo3LiX1BcrbuESZ" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS/global.css">
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
   </head>
   <body>
       <main class="main-page">
         <div class="background-image"></div>
-
       <h1 class="padding">Where The Party At?</h1>
-      <form class="add" action="#" method="post">
+      <h2>Add an Event:</h2>
+      <form class="add" action="#" method="POST">
+        <input type="text" name="name" placeholder="What is the event name?">
+        <input type="date" name="date" placeholder="When is your event?">
+        <input type="text" name="location" placeholder="Where is your event?">
+        <input type="text" name="time" placeholder="What time is your event">
+        <select name="scene">
+          <option value="">What type of scene?</option>
+          <option value="Art">Art</option>
+          <option value="Music">Music</option>
+          <option value="Dancing">Dancing</option>
+        </select>
+        <select name="cost">
+          <option value="">What does it cost?</option>
+          <option value="false">Free!</option>
+          <option value="true">Cost Money</option>
+        </select>
+        <input type="text" name="price" placeholder="How much does it cost?">
+        <input type="text" name="link" placeholder="Where can people find more information?">
+        <input type="submit" name="submit" value="Submit Your Event">
       </form>
+      <p id="response"></p>
     </main>
-    <script type="text/javascript" href= "JS/add.js"></script>
+    <script type="text/javascript" src= "JS/add.js"></script>
   </body>
 </html>
