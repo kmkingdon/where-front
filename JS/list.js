@@ -28,7 +28,7 @@ function getData (){
 }
 
 function populateList (){
-  for (i=0, i< eventsArray.length; i++){
+  for (i= 0; i< eventsArray.length; i++){
     if (eventsArray[i].scene === chosenScene && eventsArray[i].cost === chosenCost){
     var newEventCard = document.createElement("div")
     var eventName = document.createElement("h1")
