@@ -1,199 +1,52 @@
-const questionAPI= "https://convo-pro-server.herokuapp.com/questions";
-const advancedAPI= "https://convo-pro-server.herokuapp.com/advanced";
-const start = document.getElementById('start');
-const questionSection= document.getElementById('question');
-const form= document.getElementsByClassName('form')[0];
-const advancedQuestionDiv= document.getElementsByClassName('advanced-question-area')[0];
-const intimacyLevel= document.getElementById('intimacy');
-const nsfwLevel= document.getElementById('nsfw');
-const startAdvanced= document.getElementsByClassName('start-advanced')[0];
-startAdvanced.innerHTML= "";
-const changeSettings= document.getElementById('change-settings');
-const saveSettingsButton= document.querySelector('form');
-const save= document.getElementById('save');
-let intimacy;
-let nsfw;
-let availableIds= [];
+const theAPI = 'https://where-server-2.herokuapp.com/events';
 
-saveSettingsButton.addEventListener('submit', saveSettings);
+// var eventName = '';
+// var eventLocation = '';
+// var time = '';
+// var price = '';
+// var link = '';
 
-function saveSettings(event) {
-  event.preventDefault();
-  intimacy = event.target[0].value;
-  let intimacyNode= document.createTextNode(intimacy);
-  if(intimacyLevel.innerHTML === "") {
-    intimacyLevel.appendChild(intimacyNode);
-  }
-  nsfw= event.target[1].value;
-  let nsfwNode= document.createTextNode(nsfw);
-  if(nsfwLevel.innerHTML === "") {
-    nsfwLevel.appendChild(nsfwNode);
-  }
-  let startConversating= document.createElement('img');
-  startConversating.src= "assets/advancedconversating.png";
-  startConversating.id += "start-advanced-img";
-  startConversating.addEventListener('click', displayStart);
-  if(startAdvanced.hasChildNodes() === false) {
-    startAdvanced.appendChild(startConversating)
-  }
-}
+//search through the events
 
-function displayStart() {
-  form.className += " hidden";
-  advancedQuestionDiv.classList.remove("hidden");
-  fetch(advancedAPI)
-    .then(response => response.json())
-    .then(availableIdGenerator)
-}
+//filter for the highest interest score
 
-changeSettings.addEventListener('click', changeSettingsFunc);
-
-function changeSettingsFunc() {
-  location.reload();
-}
+//return that single event object
+    //Math.max(integers here)
+    //returns the largest non-zero num
+//append the object to the page
 
 
-function availableIdGenerator(response) {
-  let array2= [];
-  let array1= Object.values(response)[0];
+fetch(theAPI)
+  .then(res => res.json())
+  .then(displayMostPopularEvent)
+  .catch(console.error)
 
-  if(nsfw === "Nice") {
-    nsfw= "true";
-  } else if (nsfw === "Naughty") {
-    nsfw= "false";
-  } else if(nsfw === "Both") {
-    nsfw= "Both"
-  };
 
-  if(nsfw === "Both" && intimacy === "All") {
-    for (var i = 0; i < array1.length; i++) {
-      array2.push(array1[i]);
-    }
-  } else if(nsfw === "Both" && intimacy === "1") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 1) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "Both" && intimacy === "2") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 2) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "Both" && intimacy === "3") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 3) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "Both" && intimacy === "4") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 4) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "4") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 4 && item.familyFriendly === true) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  }else if(nsfw === "false") {
-      array1.filter(function(item) {
-        if(item.familyFriendly === false) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "1") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 1) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "2") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 2) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "3") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 3) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  }
-
-  for (var i = 0; i < array2.length; i++) {
-    availableIds.push(array2[i].id);
-  }
-}
-
-start.addEventListener('click', createNewQuestion);
-
-function createNewQuestion() {
-  fetch(questionAPI)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(mergeData)
-    .then(questionGenerator)
-}
-
-function mergeData(questions) {
-  let mergedArray= [];
-  let questionArray = Object.values(questions)[0];
-  return fetch(advancedAPI)
-    .then(response => response.json())
-    .then(function(advanced) {
-      let advancedArray= Object.values(advanced)[0];
-      questionArray.forEach(function(item, i) {
-        mergedArray.push(Object.assign(item, advancedArray[i]))
-        })
-      return mergedArray;
-    })
-}
-
-function questionGenerator(mergedArray){
-  let newQuestion;
-  let index;
-
-  let id= availableIds[Math.floor(Math.random() * (availableIds.length))];
-
-  for (var i = 0; i < mergedArray.length; i++) {
-    if(mergedArray[i].id === id) {
-      newQuestion = mergedArray[i].question;
-      let index = availableIds.indexOf(id);
-      availableIds.splice(index, 1);
+function displayMostPopularEvent(obj) {
+  var eventContainer = document.querySelector('.random-event');
+  let interestScore = obj['interest'];
+  console.log(obj, "this is the obj");
+  for (var i = 0; i < obj.length; i++) {
+    console.log(obj[i]['interest'], 'interest score???')
+    if (Math.max(obj[i]['interest'])) {
+      console.log(obj[i], "most popular party obj")
+      eventName = obj[i]['eventname'];
+      eventLocation = obj[i]['location'];
+      time = obj[i]['time'];
+      price = obj[i]['price'];
+      link = obj[i]['link'];
+      console.log(link, "herrrrrrrrr");
     }
   }
-
-  let saveImgPlaceholder= save.innerHTML;
-  let saveImg= document.createElement('img');
-  saveImg.src = "assets/favorites.png";
-  saveImg.addEventListener("click", saveQuestion);
-
-  if(saveImgPlaceholder === "") {
-    save.appendChild(saveImg)
-  }
-
-  questionSection.innerHTML = newQuestion;
 }
 
-function saveQuestion(event){
-  let currentQuestion= questionSection.innerHTML;
-  function storeQuestion () {
-    localStorage.setItem(localStorage.length + 1, currentQuestion);
-  }
-  storeQuestion();
-}
+// function displayMostPopularEvent() {
+//   var eventContainer = document.querySelector('.random-event');
+//   eventContainer.innerHTML = `
+//     <h1>what: Kevin O'Brien's [g70] House Party</h1>
+//     <h2>location: 3087 West Highland Park Place Denver</h2>
+//     <h2>time: 5:30pm</h2>
+//     <p>price: FREE</p>
+//     <a href="https://www.facebook.com/kevin.obrien.37853734" target="_blank">More Info</a>
+//     `
+// }
