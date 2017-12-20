@@ -29,7 +29,6 @@ function fetchdata(resp){
   let sceneArray= []
   let finalArray= []
 
-
   for (var i= 0; i < resp.length; i++){
     if (resp[i].scene === scene){
       sceneArray.push(resp[i])
@@ -47,7 +46,7 @@ function fetchdata(resp){
     eventName.innerText = finalArray[i].eventname;
     newEventCard.appendChild(eventName);
     var eventLocation = document.createElement("h2");
-    eventLocation.innerText = finalArray[i].eventLocation;
+    eventLocation.innerText = finalArray[i].location;
     newEventCard.appendChild(eventLocation);
     var time = document.createElement("h3");
     time.innerText = finalArray[i].time;
