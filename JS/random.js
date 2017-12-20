@@ -11,7 +11,6 @@ fetch(theAPI)
 function findMostPopularEvent(obj) {
   var eventContainer = document.querySelector('#popular-event');
   for (var i = 0; i < obj.length; i++) {
-    console.log(obj[i]['interest'], 'interest score???')
     if (Math.max(obj[i]['interest'])) {
       var mostPopular = obj[i];
     }
