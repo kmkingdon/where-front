@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>ConvoPro Question Generator</title>
-    <link rel="stylesheet" href="CSS/reset.css">
-    <link rel="stylesheet" href="CSS/about.css">
-  </head>
-  <body>
-    <main>
-      <form class="add" action="#" method="post">
+
+<head>
+  <meta charset="utf-8">
+  <title>Where The Party At?</title>
+  <link rel="stylesheet" href="CSS/reset.css">
+  <link rel="stylesheet" href="CSS/global.css">
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet">
+</head>
+
+<body>
+  <main class="main-page">
+    <div class="background-image"></div>
+    <div class="content">
+      <nav>
+        <ul>
+          <li class="form-padding"><a href="index.html">Home</a></li>
+          <li class="form-padding"><a href="search.html">Search</a></li>
+          <li class="form-padding"><a href="add.html">Add A Party</a></li>
+          <li class="form-padding"><a href="eventrandom.html">Tonight's Best Party</a></li>
+        </ul>
+      </nav>
+      <h1 class="padding">Where The Party At?</h1>
+      <h2>Add an Event:</h2>
+      <form class="add form-style-1" action="#" method="POST">
+        <div class="form-padding"><input type="text" name="name" placeholder="What is the event name?"></div>
+        <div class="form-padding"><input type="date" name="date" placeholder="When is your event?"></div>
+        <div class="form-padding"><input type="text" name="location" placeholder="Where is your event?"></div>
+        <div class="form-padding"> <input type="text" name="time" placeholder="What time is your event"></div>
+        <div class="form-padding"><select name="scene">
+          <option value="">What type of scene?</option>
+          <option value="Art">Art</option>
+          <option value="Music">Music</option>
+          <option value="Dancing">Dancing</option>
+        </select></div>
+        <div class="form-padding"> <select name="cost">
+          <option value="">What does it cost?</option>
+          <option value="false">Free!</option>
+          <option value="true">Cost Money</option>
+        </select></div>
+        <div class="form-padding"><input type="text" name="price" placeholder="How much does it cost?"></div>
+        <div class="form-padding"> <input type="text" name="link" placeholder="Where can people find more information?"></div>
+        <div class="form-padding button"> <input type="submit" name="submit" value="Submit Your Event"></div>
       </form>
-    </main>
-    <script type="text/javascript" href= "JS/add.js"></script>
-  </body>
+      <p id="response"></p>
+    </div>
+  </main>
+  <script type="text/javascript" src="JS/add.js"></script>
+</body>
+
 </html>
