@@ -13,6 +13,7 @@ function pressButton (event){
   location.href = "eventlist.html";
 }
 
+console.log(location.href.split("/")[3]);
 if(location.href.split("/")[3] === "eventlist.html") {
   getData();
 }
@@ -23,26 +24,27 @@ function getData (){
     .then(fetchdata)
     .catch(console.error);
 }
+
 function fetchdata(resp){
   let scene= localStorage.getItem("scene");
   let cost= localStorage.getItem("cost");
   let sceneArray= []
   let finalArray= []
 
-
-  for (var i= 0; i < resp.length; i++){
+ for (var i= 0; i < resp.length; i++){
     if (resp[i].scene === scene){
       sceneArray.push(resp[i])
     }
   }
 
-  for (var i = 0; i < sceneArray.length; i++) {
+ for (var i = 0; i < sceneArray.length; i++) {
     if(sceneArray[i].cost.toString() === cost)
       finalArray.push(sceneArray[i])
   }
 
-  for (var i = 0; i < finalArray.length; i++) {
+ for (var i = 0; i < finalArray.length; i++) {
     var newEventCard = document.createElement("div");
+    newEventCard.classList.add("form-style-1");
     var eventName = document.createElement("h1");
     eventName.innerText = finalArray[i].eventname;
     newEventCard.appendChild(eventName);

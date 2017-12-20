@@ -4,34 +4,32 @@
     <meta charset="utf-8">
     <title>Where The Party At?</title>
     <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-CF64UnUzxV691sOmqagn+TQJmesKn1fgsYmlIPqYB5nm0m32jYo3LiX1BcrbuESZ" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS/global.css">
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet">
 
-  </head>
+ </head>
   <body>
-    <main class="main-page content">
+    <main class="main-page">
       <div class="background-image"></div>
       <h1 class="padding">Where The Party At?</h1>
       <div class="content form-group">
-      <form class="main-form" action="#" method="post">
+      <form class="main-form" action="#" method="POST">
         <label for="scene"></label>
-        <select class="scene-choice form-padding" name="scene">
+        <select class="scene-choice" name="scene">
           <option value="">Select your scene:</option>
-          <option value="Art">Art</option>
-          <option value="Music">Music</option>
-          <option value="Dance">Dance</option>
-          <option value="House">House</option>
+          <option value="art">Art</option>
+          <option value="music">Music</option>
+          <option value="dancing">Dance</option>
         </select>
         <label for="cost"></label>
-        <div class="form-padding">
-          <select class="pick-cost" name="cost">
-            <option value="">Free or Paid:</option>
-            <option value="Free">Free</option>
-            <option value="$">Paid</option>
-          </select>
-        </div>
-        <input class="submit-button form-padding" type="submit" name="" value="Search for the Party">
+        <select class="pick-cost" name="cost">
+          <option value="">Free or Paid:</option>
+          <option value="false">Free</option>
+          <option value="true">Paid</option>
+        </select>
+        <input class="submit-button" type="submit" name="" value="Search for the Party">
       </form>
     </div>
     </main>
