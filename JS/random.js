@@ -27,10 +27,10 @@ function displayMostPopularEvent(mostPopular) {
   var price = mostPopular['price'];
   var link = mostPopular['link'];
   return eventContainer.innerHTML = `
-    <h1>what: ${partyName}</h1>
-    <h2>location: ${theLocation}</h2>
-    <h2>time: ${time}</h2>
-    <p>price: ${price}</p>
+    <h2>what: ${partyName}</h2>
+    <h3>location: ${theLocation}</h3>
+    <h3>time: ${time}</h3>
+    <p>price: $ ${price}</p>
     <a href=${link} target="_blank">More Info</a>
     `
 }
