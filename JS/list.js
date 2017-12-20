@@ -47,7 +47,7 @@ function fetchdata(resp){
     eventName.innerText = finalArray[i].eventname;
     newEventCard.appendChild(eventName);
     var eventLocation = document.createElement("h2");
-    eventLocation.innerText = finalArray[i].eventLocation;
+    eventLocation.innerText = finalArray[i].location;
     newEventCard.appendChild(eventLocation);
     var time = document.createElement("h3");
     time.innerText = finalArray[i].time;
