@@ -1,15 +1,21 @@
 const eventList = document.querySelector(".event-list");
-const submitButton = document.querySelector(".submit-button");
+const form = document.querySelector("form");
 const url = "https://where-server-2.herokuapp.com/events";
 const sceneChoice = document.querySelector(".scene-choice");
-const pickCost = document.querySelector("pick-cost");
-var eventsArray= [];
+const pickCost = document.querySelector(".pick-cost");
+var eventsArray;
 var chosenScene;
 var chosenCost;
 
-submitButton.onclick = pressButton();
+console.log(form)
 
-function pressButton (){
+form.addEventListener("submit", pressButton);
+
+
+
+function pressButton (event){
+  event.preventDefault();
+  console.log("the function is running");
   chosenScene = sceneChoice.value;
   chosenCost = pickCost.value;
   getData();
