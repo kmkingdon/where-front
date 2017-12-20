@@ -1,199 +1,37 @@
-const questionAPI= "https://convo-pro-server.herokuapp.com/questions";
-const advancedAPI= "https://convo-pro-server.herokuapp.com/advanced";
-const start = document.getElementById('start');
-const questionSection= document.getElementById('question');
-const form= document.getElementsByClassName('form')[0];
-const advancedQuestionDiv= document.getElementsByClassName('advanced-question-area')[0];
-const intimacyLevel= document.getElementById('intimacy');
-const nsfwLevel= document.getElementById('nsfw');
-const startAdvanced= document.getElementsByClassName('start-advanced')[0];
-startAdvanced.innerHTML= "";
-const changeSettings= document.getElementById('change-settings');
-const saveSettingsButton= document.querySelector('form');
-const save= document.getElementById('save');
-let intimacy;
-let nsfw;
-let availableIds= [];
-
-saveSettingsButton.addEventListener('submit', saveSettings);
-
-function saveSettings(event) {
-  event.preventDefault();
-  intimacy = event.target[0].value;
-  let intimacyNode= document.createTextNode(intimacy);
-  if(intimacyLevel.innerHTML === "") {
-    intimacyLevel.appendChild(intimacyNode);
-  }
-  nsfw= event.target[1].value;
-  let nsfwNode= document.createTextNode(nsfw);
-  if(nsfwLevel.innerHTML === "") {
-    nsfwLevel.appendChild(nsfwNode);
-  }
-  let startConversating= document.createElement('img');
-  startConversating.src= "assets/advancedconversating.png";
-  startConversating.id += "start-advanced-img";
-  startConversating.addEventListener('click', displayStart);
-  if(startAdvanced.hasChildNodes() === false) {
-    startAdvanced.appendChild(startConversating)
-  }
-}
-
-function displayStart() {
-  form.className += " hidden";
-  advancedQuestionDiv.classList.remove("hidden");
-  fetch(advancedAPI)
-    .then(response => response.json())
-    .then(availableIdGenerator)
-}
-
-changeSettings.addEventListener('click', changeSettingsFunc);
-
-function changeSettingsFunc() {
-  location.reload();
-}
+const theAPI = 'https://where-server-2.herokuapp.com/events';
 
 
-function availableIdGenerator(response) {
-  let array2= [];
-  let array1= Object.values(response)[0];
+fetch(theAPI)
+  .then(res => res.json())
+  .then(findMostPopularEvent)
+  .then(displayMostPopularEvent)
+  .catch(console.error)
 
-  if(nsfw === "Nice") {
-    nsfw= "true";
-  } else if (nsfw === "Naughty") {
-    nsfw= "false";
-  } else if(nsfw === "Both") {
-    nsfw= "Both"
-  };
 
-  if(nsfw === "Both" && intimacy === "All") {
-    for (var i = 0; i < array1.length; i++) {
-      array2.push(array1[i]);
-    }
-  } else if(nsfw === "Both" && intimacy === "1") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 1) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "Both" && intimacy === "2") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 2) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "Both" && intimacy === "3") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 3) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "Both" && intimacy === "4") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 4) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "4") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 4 && item.familyFriendly === true) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  }else if(nsfw === "false") {
-      array1.filter(function(item) {
-        if(item.familyFriendly === false) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "1") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 1) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "2") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 2) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  } else if(nsfw === "true" && intimacy === "3") {
-      array1.filter(function(item) {
-        if(item.intimacyLevel === 3) {
-          array2.push(item);
-        }
-        return array2;
-      })
-  }
-
-  for (var i = 0; i < array2.length; i++) {
-    availableIds.push(array2[i].id);
-  }
-}
-
-start.addEventListener('click', createNewQuestion);
-
-function createNewQuestion() {
-  fetch(questionAPI)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(mergeData)
-    .then(questionGenerator)
-}
-
-function mergeData(questions) {
-  let mergedArray= [];
-  let questionArray = Object.values(questions)[0];
-  return fetch(advancedAPI)
-    .then(response => response.json())
-    .then(function(advanced) {
-      let advancedArray= Object.values(advanced)[0];
-      questionArray.forEach(function(item, i) {
-        mergedArray.push(Object.assign(item, advancedArray[i]))
-        })
-      return mergedArray;
-    })
-}
-
-function questionGenerator(mergedArray){
-  let newQuestion;
-  let index;
-
-  let id= availableIds[Math.floor(Math.random() * (availableIds.length))];
-
-  for (var i = 0; i < mergedArray.length; i++) {
-    if(mergedArray[i].id === id) {
-      newQuestion = mergedArray[i].question;
-      let index = availableIds.indexOf(id);
-      availableIds.splice(index, 1);
+function findMostPopularEvent(obj) {
+  var eventContainer = document.querySelector('#popular-event');
+  for (var i = 0; i < obj.length; i++) {
+    console.log(obj[i]['interest'], 'interest score???')
+    if (Math.max(obj[i]['interest'])) {
+      var mostPopular = obj[i];
     }
   }
-
-  let saveImgPlaceholder= save.innerHTML;
-  let saveImg= document.createElement('img');
-  saveImg.src = "assets/favorites.png";
-  saveImg.addEventListener("click", saveQuestion);
-
-  if(saveImgPlaceholder === "") {
-    save.appendChild(saveImg)
-  }
-
-  questionSection.innerHTML = newQuestion;
+  return mostPopular;
 }
 
-function saveQuestion(event){
-  let currentQuestion= questionSection.innerHTML;
-  function storeQuestion () {
-    localStorage.setItem(localStorage.length + 1, currentQuestion);
-  }
-  storeQuestion();
+
+function displayMostPopularEvent(mostPopular) {
+  var eventContainer = document.querySelector('#popular-event');
+  var partyName = mostPopular['eventname'];
+  var theLocation = mostPopular['location'];
+  var time = mostPopular['time'];
+  var price = mostPopular['price'];
+  var link = mostPopular['link'];
+  return eventContainer.innerHTML = `
+    <h1>what: ${partyName}</h1>
+    <h2>location: ${theLocation}</h2>
+    <h2>time: ${time}</h2>
+    <p>price: ${price}</p>
+    <a href=${link} target="_blank">More Info</a>
+    `
 }
