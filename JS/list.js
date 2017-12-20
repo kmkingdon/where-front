@@ -1,21 +1,19 @@
-const favoriteList= document.getElementById('favorite-list');
-const reset= document.getElementById('reset');
-const eventList = document.querySelector(".event-list")
-const submitButton = document.querySelector(".submit-button")
-const url = "https://where-server-2.herokuapp.com/events"
-const sceneChoice = document.querySelector(".scene-choice")
-const pickCost = document.querySelector("pick-cost")
-const eventsArray= [];
+const eventList = document.querySelector(".event-list");
+const submitButton = document.querySelector(".submit-button");
+const url = "https://where-server-2.herokuapp.com/events";
+const sceneChoice = document.querySelector(".scene-choice");
+const pickCost = document.querySelector("pick-cost");
+var eventsArray= [];
 var chosenScene;
 var chosenCost;
 
 submitButton.onclick = pressButton();
 
 function pressButton (){
-chosenScene = sceneChoice.value
-chosenCost = pickCost.value
-getData();
-populateList();
+  chosenScene = sceneChoice.value;
+  chosenCost = pickCost.value;
+  getData();
+  populateList();
 }
 
 function getData (){
@@ -23,30 +21,30 @@ function getData (){
     .then((resp) => resp.json())
     .then(function (resp){
       eventsArray = resp.events
-    .catch(console.error)
-    })
+        .catch(console.error);
+    });
 }
 
 function populateList (){
-  for (i= 0; i< eventsArray.length; i++){
+  for (var i= 0; i < eventsArray.length; i++){
     if (eventsArray[i].scene === chosenScene && eventsArray[i].cost === chosenCost){
-    var newEventCard = document.createElement("div")
-    var eventName = document.createElement("h1")
-    eventName.innerText = eventsArray[i].eventname
-    newEventCard.appendChild(eventName)
-    var eventLocation = document.createElement("h2")
-    eventLocation.innerText = eventsArray[i].eventLocation
-    newEventCard.appendChild(eventLocation)
-    var time = document.createElement("h3")
-    time.innerText = eventsArray[i].time
-    newEventCard.appendChild(time)
-    var cost = document.createElement("h3")
-    cost.innerText = eventsArray[i].price
-    newEventCard.appendChild(cost)
-    var link = document.createElement("h3")
-    link.innerText = eventsArray[i].link
-    newEventCard.appendChild(link)
-    eventList.appendChild(newEventCard)
+      var newEventCard = document.createElement("div");
+      var eventName = document.createElement("h1");
+      eventName.innerText = eventsArray[i].eventname;
+      newEventCard.appendChild(eventName);
+      var eventLocation = document.createElement("h2");
+      eventLocation.innerText = eventsArray[i].eventLocation;
+      newEventCard.appendChild(eventLocation);
+      var time = document.createElement("h3");
+      time.innerText = eventsArray[i].time;
+      newEventCard.appendChild(time);
+      var cost = document.createElement("h3");
+      cost.innerText = eventsArray[i].price;
+      newEventCard.appendChild(cost);
+      var link = document.createElement("h3");
+      link.innerText = eventsArray[i].link;
+      newEventCard.appendChild(link);
+      eventList.appendChild(newEventCard);
     }
   }
 }
