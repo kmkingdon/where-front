@@ -10,13 +10,13 @@
 
   </head>
   <body>
-    <main class="main-page">
+    <main class="main-page content">
       <div class="background-image"></div>
       <h1 class="padding">Where The Party At?</h1>
       <div class="content form-group">
       <form class="main-form" action="#" method="post">
         <label for="scene"></label>
-        <select class="scene-choice" name="scene">
+        <select class="scene-choice form-padding" name="scene">
           <option value="">Select your scene:</option>
           <option value="Art">Art</option>
           <option value="Music">Music</option>
@@ -24,12 +24,14 @@
           <option value="House">House</option>
         </select>
         <label for="cost"></label>
-        <select class="pick-cost" name="cost">
-          <option value="">Free or Paid:</option>
-          <option value="Free">Free</option>
-          <option value="$">Paid</option>
-        </select>
-        <input class="submit-button" type="submit" name="" value="Search for the Party">
+        <div class="form-padding">
+          <select class="pick-cost" name="cost">
+            <option value="">Free or Paid:</option>
+            <option value="Free">Free</option>
+            <option value="$">Paid</option>
+          </select>
+        </div>
+        <input class="submit-button form-padding" type="submit" name="" value="Search for the Party">
       </form>
     </div>
     </main>
