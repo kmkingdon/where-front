@@ -109,7 +109,7 @@ input, select {
 }
 
 .form-padding {
-  padding: 1rem;
+  padding: 0.4rem;
 }
 
 .form-style-1 {
@@ -118,4 +118,8 @@ input, select {
     padding: 20px 12px 10px 20px;
     font-size: 30px;
     font-family: 'Lato', sans-serif;
+}
+
+#popular-event {
+  text-align: center;
 }
