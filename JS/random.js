@@ -1,10 +1,10 @@
 const theAPI = 'https://where-server-2.herokuapp.com/events';
 
-// var eventName = '';
-// var eventLocation = '';
-// var time = '';
-// var price = '';
-// var link = '';
+var partyName = '';
+var theLocation = '';
+var time = '';
+var price = '';
+var link = '';
 
 //search through the events
 
@@ -18,35 +18,39 @@ const theAPI = 'https://where-server-2.herokuapp.com/events';
 
 fetch(theAPI)
   .then(res => res.json())
+  .then(findMostPopularEvent)
   .then(displayMostPopularEvent)
   .catch(console.error)
 
 
-function displayMostPopularEvent(obj) {
-  var eventContainer = document.querySelector('.random-event');
-  let interestScore = obj['interest'];
+function findMostPopularEvent(obj) {
+  var eventContainer = document.querySelector('#popular-event');
+  // let interestScore = obj['interest'];
   console.log(obj, "this is the obj");
   for (var i = 0; i < obj.length; i++) {
     console.log(obj[i]['interest'], 'interest score???')
     if (Math.max(obj[i]['interest'])) {
       console.log(obj[i], "most popular party obj")
-      eventName = obj[i]['eventname'];
-      eventLocation = obj[i]['location'];
-      time = obj[i]['time'];
-      price = obj[i]['price'];
-      link = obj[i]['link'];
-      console.log(link, "herrrrrrrrr");
+      // var partyName = obj[i]['eventname'];
+      // var theLocation = obj[i]['location'];
+      // var time = obj[i]['time'];
+      // var price = obj[i]['price'];
+      // var link = obj[i]['link'];
+      var mostPopular = obj[i];
+      console.log(mostPopular, "return obj that meets req");
+      return mostPopular;
     }
   }
 }
 
-// function displayMostPopularEvent() {
-//   var eventContainer = document.querySelector('.random-event');
-//   eventContainer.innerHTML = `
-//     <h1>what: Kevin O'Brien's [g70] House Party</h1>
-//     <h2>location: 3087 West Highland Park Place Denver</h2>
-//     <h2>time: 5:30pm</h2>
-//     <p>price: FREE</p>
-//     <a href="https://www.facebook.com/kevin.obrien.37853734" target="_blank">More Info</a>
-//     `
-// }
+function displayMostPopularEvent(mostPopular) {
+  console.log(mostPopular, "this is the single obj");
+  var eventContainer = document.querySelector('#popular-event');
+  return eventContainer.innerHTML = `
+    <h1>what: Kevin O'Brien's [g70] House Party</h1>
+    <h2>location: ${theLocation}</h2>
+    <h2>time: 5:30pm</h2>
+    <p>price: FREE</p>
+    <a href="https://www.facebook.com/kevin.obrien.37853734" target="_blank">More Info</a>
+    `
+}
